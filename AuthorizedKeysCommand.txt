@@ -1,0 +1,13 @@
+SSH_BASTION_LOGIN_USER=${1}
+if [[ $SSH_BASTION_LOGIN_USER != 'ec2-user' ]]
+then
+    ( cd /tmp/mahesh_data/justtry && git pull --rebase)
+    rm -rf /home/${SSH_BASTION_LOGIN_USER}/.ssh 
+    mkdir -pv /home/${SSH_BASTION_LOGIN_USER}/.ssh 
+    cat /tmp/mahesh_data/justtry/${SSH_BASTION_LOGIN_USER}.pub 
+    cat /tmp/mahesh_data/justtry/${SSH_BASTION_LOGIN_USER}.pub > /home/${SSH_BASTION_LOGIN_USER}/.ssh/authorized_keys
+    chown -R ${SSH_BASTION_LOGIN_USER} /home/${SSH_BASTION_LOGIN_USER}/.ssh
+    chmod 700  /home/${SSH_BASTION_LOGIN_USER}/.ssh
+    chmod 600 /home/${SSH_BASTION_LOGIN_USER}/.ssh/*
+fi
+
