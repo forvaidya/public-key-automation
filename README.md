@@ -27,6 +27,6 @@ A template AuthorizedKeysCommand.txt is provided to be added to script ```public
 In this template everytime SSH login is attempted Git clone is refreshed, ~/.ssh/authorized_keys is removed and recreated based on content in git clone for respective SSH_REMOTE_USER
 
 ## Drawbacks
-+ This commnad is run as root so make sure to execute trusted code in ```public-keys-collect-and-install```
++ This command is run as root so make sure to execute trusted code in ```public-keys-collect-and-install```
 + I have tested in github and there may be a lag between of git push and reflecting that change after git pull on SSH Server. 
 
