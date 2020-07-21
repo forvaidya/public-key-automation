@@ -1,11 +1,12 @@
 SSH_BASTION_LOGIN_USER=${1}
+SSH_PUBLIC_KEY_STORE=/root/locationof/public-key-automation
 if [[ $SSH_BASTION_LOGIN_USER != 'ec2-user' ]]
 then
-    ( cd /root/mahesh_work/justtry && git pull --rebase)
+    ( cd ${SSH_PUBLIC_KEY_STORE} && git pull --rebase)
     rm -rf /home/${SSH_BASTION_LOGIN_USER}/.ssh 
     mkdir -pv /home/${SSH_BASTION_LOGIN_USER}/.ssh 
-    cat /tmp/mahesh_data/justtry/${SSH_BASTION_LOGIN_USER}.pub 
-    cat /tmp/mahesh_data/justtry/${SSH_BASTION_LOGIN_USER}.pub > /home/${SSH_BASTION_LOGIN_USER}/.ssh/authorized_keys
+    cat ${SSH_PUBLIC_KEY_STORE}/${SSH_BASTION_LOGIN_USER}.pub 
+    cat ${SSH_PUBLIC_KEY_STORE}/${SSH_BASTION_LOGIN_USER}.pub > /home/${SSH_BASTION_LOGIN_USER}/.ssh/authorized_keys
     chown -R ${SSH_BASTION_LOGIN_USER} /home/${SSH_BASTION_LOGIN_USER}/.ssh
     chmod 700  /home/${SSH_BASTION_LOGIN_USER}/.ssh
     chmod 600 /home/${SSH_BASTION_LOGIN_USER}/.ssh/*
