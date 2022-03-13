@@ -29,4 +29,8 @@ In this template everytime SSH login is attempted Git clone is refreshed, ~/.ssh
 ## Drawbacks
 + This command is run as root so make sure to execute trusted code in ```public-keys-collect-and-install```
 + I have tested in github and there may be a lag between of git push and reflecting that change after git pull on SSH Server. 
++ This can make SSH Connectivity slow as there is IO operation, like pulling all Public Keys from backend like S3 or Gihub.
 
+## Race Condition 
+There is a possibility that 2 or more process of this script are running and latest run will win.
+To avoid this a lock object can be created in some backend like S3, mySQL, DynamoDB etc (just like terraform)
