@@ -34,3 +34,9 @@ In this template everytime SSH login is attempted Git clone is refreshed, ~/.ssh
 ## Race Condition 
 There is a possibility that 2 or more process of this script are running and latest run will win.
 To avoid this a lock object can be created in some backend like S3, mySQL, DynamoDB etc (just like terraform)
+
+## Possible Automation
+A workflow can be developed such that a user commits SSH public key in github and opens a PR. Administrator approves or disapproves PR and keys will be available on master branch and will grant an access
+
+For offboarding - develop a workflow which can remove ssh public keys from github master (main) branch
+
